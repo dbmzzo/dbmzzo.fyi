@@ -24,6 +24,10 @@
   transform-box: fill-box;
 }
 
+.text-label {
+  margin-left: .25rem;
+}
+
 /* rules for checkbox state */
 
 :focus ~ svg .focus-highlight {
