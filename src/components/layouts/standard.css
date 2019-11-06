@@ -31,6 +31,8 @@ main {
 
 .mdx {
   padding: 0 1rem;
+  max-width: 850px;
+  margin: auto;
 }
 
 .mdx h2:first-child {

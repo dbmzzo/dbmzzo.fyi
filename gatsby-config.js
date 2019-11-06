@@ -7,7 +7,12 @@ module.exports = {
   plugins: [
     'gatsby-plugin-react-helmet',
     'gatsby-transformer-sharp',
-    'gatsby-plugin-sharp',
+    {
+      resolve: 'gatsby-plugin-sharp',
+      options: {
+        stripMetadata: true,
+      },
+    },
     {
       resolve: 'gatsby-source-filesystem',
       options: {
@@ -40,6 +45,12 @@ module.exports = {
       },
     },
     {
+      resolve: 'gatsby-remark-images',
+      options: {
+        maxWidth: 850,
+      },
+    },
+    {
       resolve: 'gatsby-plugin-mdx',
       options: {
         extensions: ['.mdx', '.md'],
@@ -50,7 +61,7 @@ module.exports = {
           {
             resolve: 'gatsby-remark-images',
             options: {
-              maxWidth: 1200,
+              maxWidth: 850,
             },
           },
           {
