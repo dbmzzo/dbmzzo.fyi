@@ -1,21 +1,38 @@
-import React from "react"
-import { Link } from "gatsby"
+import React from 'react';
+import { graphql } from 'gatsby';
+import PostLink from '../components/elements/post-link';
 
-import Layout from "../components/layout"
-import Image from "../components/image"
-import SEO from "../components/seo"
+import SEO from '../components/tools/seo';
 
-const IndexPage = () => (
-  <Layout>
-    <SEO title="Home" />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
+const IndexPage = ({ data: { allMdx } }) => {
+  const Posts = allMdx.edges
+    .filter((edge) => !!edge.node.frontmatter.date)
+    .map((edge) => <PostLink key={edge.node.id} post={edge.node} />);
+  return (
+    <div className="post-list">
+      <SEO title="Home" />
+      {Posts}
     </div>
-    <Link to="/page-2/">Go to page 2</Link>
-  </Layout>
-)
+  );
+};
 
-export default IndexPage
+export default IndexPage;
+
+export const pageQuery = graphql`
+  query {
+    allMdx(sort: { order: DESC, fields: [frontmatter___date] }) {
+      edges {
+        node {
+          id
+          excerpt(pruneLength: 100)
+          tableOfContents
+          frontmatter {
+            date(formatString: "MMM DD")
+            path
+            title
+          }
+        }
+      }
+    }
+  }
+`;

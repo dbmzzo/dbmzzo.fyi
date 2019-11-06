@@ -1,0 +1,23 @@
+.orbit {
+  position: relative;
+  display: inline-block;
+  height: calc(3 * var(--base-height));
+  width: calc(3 * var(--base-height));
+  vertical-align: top;
+}
+.orbit svg {
+  vertical-align: top;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.orbit svg.planet {
+  z-index: 2;
+}
+
+.orbit svg.moon {
+  z-index: 3;
+  left: -10px;
+  top: -10px;
+}

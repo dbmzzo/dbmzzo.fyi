@@ -1,0 +1,51 @@
+.toggle {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  vertical-align: middle;
+  display: inline-flex;
+  align-items: center;
+  line-height: 0;
+}
+
+.channel {
+  fill: var(--highlight-color);
+}
+
+.focus-highlight {
+  fill: none;
+  stroke: transparent;
+  stroke-width: 2;
+  transition: stroke .25s;
+}
+
+.knob {
+  fill: var(--text-color);
+  transition: transform .25s, fill .25s;
+  transform-origin: center center;
+  transform-box: fill-box;
+}
+
+/* rules for checkbox state */
+
+:focus ~ svg .focus-highlight {
+  stroke: var(--pop-color);
+}
+
+:disabled ~ .text-label {
+  opacity: .5;
+}
+
+:checked ~ svg .knob {
+  fill: var(--pop-color);
+  transform: translateX(24px);
+}
+
+/* rules for "standard" checkbox option */
+
+.toggle:not(.standard) input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+}
+
+.toggle.standard svg {
+  display: none;
+}

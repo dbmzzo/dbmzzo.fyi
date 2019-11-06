@@ -1,0 +1,8 @@
+nav {
+  border-right: 1px solid var(--offset-color);
+}
+
+svg {
+  display: block;
+}
+

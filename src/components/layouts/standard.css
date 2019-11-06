@@ -1,0 +1,43 @@
+.grid {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+@media (min-width: 768px) {
+  .grid {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+  }
+}
+
+main {
+  min-width: 0;
+  flex: 1;
+  width: 100vw;
+  background-color: white;
+  padding: var(--base-height) 0;
+}
+
+@media only screen and (orientation: landscape) {
+  @supports(padding: max(0px)) {
+    main, header {
+      box-sizing: border-box;
+      padding-left: max(1rem, env(safe-area-inset-left));
+      padding-right: max(1rem, env(safe-area-inset-right));
+    }
+  }
+}
+
+.mdx {
+  padding: 0 1rem;
+}
+
+.mdx h2:first-child {
+  margin-top: 0;
+}
+
+p.toot label {
+  margin-right: 2rem;
+}
+

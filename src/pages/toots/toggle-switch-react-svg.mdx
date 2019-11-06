@@ -1,0 +1,372 @@
+---
+title: Build an Accessible Toggle Switch with React and SVG
+path: /toots/toggle-switch-react-svg
+date: 2019-10-24
+---
+import Toggle from '../../components/elements/toggle.js';
+
+## Build an Accessible Toggle Switch with React and SVG 
+
+### Table of Contents
+
+```toc
+from-heading: 3
+tight: true
+```
+
+### Introduction
+
+I wanted a checkbox that would match my site's visual style and render consistently across all browsers,
+Unfortunately, most browsers use native OS inputs or draw their own custom controls.
+This is how I built what I was looking for.
+
+An example of this control in use can be seen in the header of this site, and it toggles a
+vertical rhythm grid. I implement it like this:
+
+```js
+<Toggle
+  checked 
+  label="Toggle Grid"
+  ariaLabel="Toggle vertical rhythm grid" 
+  handleChange={toggleGrid}
+/>
+```
+
+<p>
+  <Toggle label="Toggle Grid" />
+</p>
+
+#### SVG? In a Form Control? 
+
+There are well-worn techniques for restyling inputs with CSS, so why introduce SVG into the mix?
+
+It's a personal preference. I've never loved using CSS for drawing because, as anyone who
+has ever tried to draw a triangle with CSS knows, it's difficult 
+to create anything but circles and rectangles.
+
+SVG is designed for drawing, so why not use it? It certainly adds complexity in the form of
+additional DOM elements, offers far more opportunity for customization. 
+
+It's also just more fun!
+
+#### What About Accessibility?
+
+This custom control preserves the keyboard navigation, focus, aria-label of
+of a standard checkbox because it's backed by and tightly coupled to a standard `input type=checkbox` element.
+It's purely functional component with no state to keep in sync for focus, checked, and disabled conditions.
+
+### Build It!
+
+#### Start with a Input Component
+
+To get started, let's create a basic functional component with an associated stylesheet.
+
+To ensure that our custom control works as much like a standard input as possible,
+we'll use a standard input behind the scenes:
+
+```js
+import React from 'react';
+import './toggle.css';
+
+const Toggle = () => {
+  return (
+    <label className="toggle">
+      <input type="checkbox" />
+    </label>
+  );
+};
+
+export default Toggle;
+```
+
+> Note that we put the input inside the `<label>` tag. This creates an implicit association
+between the input and label and lets us avoid using `htmlFor` or a unique `id` in
+case we have multiple controls on a page, while still allowing us to toggle the input
+by interacting with label.
+
+#### Add Essential Properties
+
+There are a number of properties that we'll need our `<Toggle />` component to accept. Let's
+start with the most essential:
+
+- `checked` boolean for the toggle's default condition
+- `disabled` boolean for the toggle's disabled condition
+- `label` string for text label
+- `ariaLabel` string for accessible screen reader description
+
+Let's destructure those properties at the top of the function...
+
+```js
+const Toggle = ({ checked, label, disabled }) => {
+```
+
+...and render them:
+
+```js{3-6,9}
+<label className="toggle">
+  <input
+    type="checkbox"
+    disabled={disabled}
+    defaultChecked={checked}
+    ariaLabel={ariaLabel}
+  />
+  <span className="text-label">
+    {label}
+  </span>
+  ...
+```
+
+> Note that we use the input's `defaultChecked` instead of the `checked` property. To learn more about
+why, read [this article from the React team](https://reactjs.org/docs/uncontrolled-components.html)
+
+Now you should have a checkbox that behaves identically to a native checkbox, but with
+a built-in label that we can interact with. See, we're already making our lives easier:
+
+<Toggle standard label="Boring Checkbox"/>
+
+```js
+<Toggle label="Boring Checkbox"/>
+```
+
+<Toggle checked standard label="Boring Checked Checkbox"/>
+
+```js
+<Toggle checked label="Boring Checked Checkbox"/>
+```
+
+<Toggle standard disabled label="Boring Disabled Checkbox"/>
+
+```js
+<Toggle checked disabled label="Boring Disabled Checkbox"/>
+```
+
+#### Insert Custom SVG
+
+Let's add our custom SVG. The simplest possible slide toggle consists of a **knob** that moves
+horizontally within a **channel** or track. Let's start with two rectangles and round their corners with
+the `rx` attribute:
+
+> I wasn't sure at first whether I wanted rounded or rectangular shapes, and the `rx` attribute
+> let me experiment without having to switch between `rect` and `circle` shapes.
+
+```js{9-26}
+return (
+  <label className="toggle">
+    <input
+      type="checkbox"
+      disabled={disabled}
+      defaultChecked={checked}
+      ariaLabel={ariaLabel}
+    />
+    <svg height="24px" viewBox="0,0 48,24">
+      <rect
+        className="channel"
+        x="0"
+        y="0"
+        rx="12"
+        width="48"
+        height="24"
+      />
+      <rect
+        className="knob"
+        x="4"
+        y="4"
+        rx="8"
+        width="16"
+        height="16"
+      />
+    </svg>
+    <span className="text-label">
+      {label}
+    </span>
+  </label>
+);
+```
+
+#### Hide the Input Element
+
+Before hiding the input element, ensure that it gets toggled when you click or tap
+on your new SVG.
+
+Once you've done that, we can hide the `input` with the following style:
+
+```css
+input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+}
+```
+
+Note that we can't use `display: none` or `visibility: hidden` because doing so removes our
+ability to interact with the native input.
+
+
+#### Style the SVG Shapes
+
+I use [custom CSS properties](https://developer.mozilla.org/en-US/docs/Web/CSS/--*) on my site, so my stylesheet looks something like this.
+
+```css
+:root {
+  --text-color: #24282d;
+  --highlight-color: #D9D6D4;
+  --pop-color: #D92B2B;
+  );
+}
+
+.channel {
+  fill: var(--highlight-color);
+}
+
+.knob {
+  fill: var(--text-color);
+}
+
+```
+
+#### Checked Styles
+
+We need a way to let the `checked` condition of our native input to control the style
+of our knob element. Doing so is easy using [the general sibling combinator](https://developer.mozilla.org/en-US/docs/Web/CSS/General_sibling_combinator)
+in conjunction with the [checked pseudo-class selector](https://developer.mozilla.org/en-US/docs/Web/CSS/:checked):
+
+```css
+:checked ~ svg .knob {
+  /* checked styles here */
+}
+```
+
+This rule targets `.knob` elements that are descendants
+of `svg` elements that are themselves siblings of any element that has a
+`checked` attribute.
+
+Change the color of the knob and move it `24px` to the right:
+
+```css{2-3}
+:checked ~ svg .knob {
+  fill: var(--pop-color);
+  transform: translateX(24px);
+}
+```
+
+The knob now moves and changes color when you click on it.
+
+We want these changes to be animated, so update the basic `.knob` rule like so:
+
+```css{3-4}
+.knob {
+  fill: var(--text-color);
+  transition: transform .25s, fill .25s;
+  transform-box: fill-box;
+}
+```
+
+> The `transform-box: fill box;` line may be unfamiliar. Sometimes [SVG elements behave
+> differently from standard HTML elements when applying transforms](https://css-tricks.com/transforms-on-svg-elements/), and
+> this rule helps them act like their HTML counterparts.
+
+#### Disabled Styles
+
+We can use a similar technique for the disabled state, but targeting all siblings (in this
+case our SVG and the label):
+
+```css
+:disabled ~ .text-label {
+  opacity: .5;
+}
+```
+
+#### Focus Highlight
+
+There are a number of ways we could indicate when the toggle is the focused element.
+I chose to add a third shape to my SVG, an inset highlight:
+
+```js{10-17}
+<svg height="24px" viewBox="0,0 48,24">
+  <rect
+    className="channel"
+    x="0"
+    y="0"
+    rx="12"
+    width="48"
+    height="24"
+  />
+  <rect
+    className="focus-highlight"
+    x="1"
+    y="1"
+    rx="11"
+    width="46"
+    height="22"
+  />
+  <rect
+    className="knob"
+    x="4"
+    y="4"
+    rx="8"
+    width="16"
+    height="16"
+  />
+</svg>
+```
+
+Make the highlight invisible in its non-focused state:
+
+```css
+.focus-highlight {
+  fill: none;
+  stroke: none;
+  stroke-width: 0;
+  tansition: stroke, stroke-width
+}
+```
+
+And visible in its focused state:
+
+```css
+:focus ~ svg .focus-highlight {
+  stroke-width: 2;
+  stroke: var(--pop-color);
+}
+```
+
+#### Call a Function on Toggle
+
+The point of this whole exercise is to toggle something, so let's add a function
+to our component properties:
+
+```js{5}
+const Toggle = ({
+  checked,
+  label,
+  disabled,
+  handleChange
+}) => {
+```
+
+And call that function when the input is toggled:
+
+```js{6}
+<input
+  type="checkbox"
+  disabled={disabled}
+  defaultChecked={checked}
+  ariaLabel={ariaLabel}
+  handleChange={handleChange}
+/>
+```
+
+#### Presto!
+
+There you have it -- a totally custom-designed, keyboard and screen-reader accessible,
+slide toggle backed by a native input.
+
+### Next Steps
+
+There are still lots of things we can do to make our shiny new toggle even shinier.
+Here are some ideas for improvements:
+
+- Add size classes so we can make `small` and `large` versions of the toggle
+- Enable vertical alignment with a `vertical` property
+- Allow the label appear on the left or the right of the control
+
+If you have any feedback or questions, don't hesitate to [contact me](/dan).

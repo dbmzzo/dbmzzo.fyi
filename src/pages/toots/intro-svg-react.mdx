@@ -1,0 +1,186 @@
+---
+title: Composing Graphics with React and SVG
+path: /toots/intro-svg-react
+date: 2019-01-29
+---
+## Composing Graphics with React and SVG
+
+> This lesson assumes familiarity with HTML, CSS, and the basic principles of React but very little knowledge of SVG.
+
+### Introduction
+
+The artful combination of HTML and CSS is a tried-and-true solution for creating simple graphics like notification badges and arrows. Anything more complex can result in a mess of nested `div` elements and mile-long CSS rules.
+
+SVG is here to help.
+
+From simple glyphs to complex visualizations, you can use SVG to create reusable React components that render precise vector graphics, all without any additional libraries or tools.
+
+In this lesson, we'll build a colorful spinning loading indicator, a `<Spinner />` React component, using some very simple SVG markup.
+
+You may be familiar with SVG (Scalable Vector Graphics) as a file format for vector images on the web, where they can be displayed with the same `img` tags that you use for `jpg`, `gif`, and `png` files:
+
+```html
+<img src="image.svg">
+```
+
+If you've ever opened an SVG file with a text editor, you'll know that it looks a lot like HTML. In fact, SVG code can be mixed right in with HTML. The following is a valid page, and renders a 100 pixel wide image of a blue circle with a gray border:
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SVG</title>
+  </head>
+  <body>
+    <svg viewBox="0 0 100 100" width="100">
+      <circle fill="lightblue" stroke="darkgray" cx="50" cy="50" r="45"/>
+    </svg>
+  </body>
+</html>
+```
+
+This circle is a good starting place for our spinner.
+
+### Create the spinner component
+
+Let's take the SVG in the code above and turn it into a basic React component. Along the way, let's make our circle's outline a little thicker by adding the `strokeWidth` attribute:
+
+```js
+import React from 'react';
+
+function Spinner() {
+  return (
+    <svg viewBox="0 0 100 100" width="100">
+      <circle fill="lightblue" stroke="darkgray" strokeWidth="4" cx="50" cy="50" r="45"/>
+    </svg>
+  );
+}
+
+export default Spinner;
+```
+
+As you've probably inferred, the `circle` tag's attributes `cx` and `cy` are the coordinates of the circle's center, and `r` is the circle's radius.
+
+> What might not be as obvious is the `svg` element's `viewBox` attribute. You use `viewBox` to establish the coordinate space of the SVG. In this case, the top left corner is specified by the first two numbers, `0 0`, and the bottom right by the second two, `100 100`. This means the svg is 100 units wide and tall, and the center of the `svg` is at `50 50`. Try tweaking the `viewBox` values and see how the image changes.
+
+### Add more shapes
+
+Spinners need something to spin, right? So let's make some more shapes!
+
+Below the `<circle>` element, add a translucent white square. The attributes of a `rect` are fairly straightforward, but you might have noticed the unusual `strokeOpacity` attribute. In addition to setting overall opacity as with HTML, SVG allows you to set independent opacity values for a shape's fill and stroke. Feel the power!
+
+```html
+<rect x="25" y="25" width="50" height="50" stroke="darkgray" fill="white" fillOpacity=".5" strokeWidth="4"/>
+```
+
+Next, let's add a green hexagon. This is where the power of drawing with SVG starts to outshine what can be accomplished with pure HTML and CSS.
+
+The `points` attribute is simply a list of points that correspond to the corners of your polygon:
+
+```html
+<polygon points="63,57.5 50,65 37,57 37,42.5 50,35 63,42.5" fill="lightgreen" strokeWidth="4" stroke="darkgray" />
+```
+
+Easy! Try changing, removing, or adding new numbers in the `points` attribute around to see what happens.
+
+Your component now has some shapes to spin, but before we get them spinning, let's discuss how we can use CSS in conjunction with SVG to make our lives easier.
+
+### Stylesheets
+
+Like HTML, SVG can be styled with CSS. Attributes like `fill`, `stroke`, and `path` can be specified in your styles, and CSS transitions and animations also work with SVG.
+
+Let's add `className` attributes to our shapes:
+
+```html
+<circle className="spinner circle" fill="lightblue" strokeWidth="4" stroke="darkgray" cx="50" cy="50" r="45"/>
+<rect className="spinner rect" x="25" y="25" width="50" height="50" stroke="darkgray" fill="white" fillOpacity=".5" strokeWidth="4"/>
+<polygon className="spinner hex" points="63,57.5 50,65 37,57 37,42.5 50,35 63,42.5" fill="lightgreen" strokeWidth="4" stroke="darkgray" />
+```
+
+Move the styling attributes out of your shape elements and into your stylesheet:
+
+```css
+.spinner {
+  stroke: darkgray;
+  stroke-width: 4;
+}
+
+.circle {
+  fill: lightblue;
+}
+
+.rect {
+  fill: white;
+  fill-opacity: .5;
+}
+
+.hex {
+  fill: lightgreen;
+}
+```
+
+Your SVG code should now look like this:
+
+```html
+<circle className="spinner circle" cx="50" cy="50" r="45"/>
+<rect className="spinner rect" x="25" y="25" width="50" height="50" />
+<polygon className="spinner hex" points="63,57.5 50,65 37,57 37,42.5 50,35 63,42.5" />
+```
+
+Ah, much more concise. Now, let's finally get that spinner spinning!
+
+### Animation
+
+In your stylesheet, create a simple CSS animation for rotation:
+
+```css
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+```
+
+Apply the animation to the hexagon:
+
+```css
+.hex {
+  fill: lightgreen;
+  animation: rotation 2s infinite;
+}
+```
+
+To make things interesting, let's apply the same animation to the rectangle, but mix up the direction and timing:
+
+```css
+.rect {
+  fill: white;
+  fill-opacity: .5;
+  animation: rotation 2s infinite alternate-reverse;
+}
+```
+
+Congratulations, you're now the owner an animated SVG component with two spinning shapes! Put it anywhere in your React app with the simple tag:
+
+```jsx
+<Spinner />
+```
+
+### Challenges
+
+Some tasks you can challenge yourself with:
+
+- Break the hexagon shape out into its own React component and use them within the `<Spinner />` component.
+- Pass an attribute to the spinner that controls how fast the spinner spins, like this: `<Spinner speed="fast|slow" />` *(hint: using class names is one approach)*
+- Research how to use text with SVG and pass a loading message into the spinner component like this: `<Spinner message="loading..." />`
+
+### Next steps
+
+We've only scratched the surface of what you can accomplish by pairing SVG with React. I encourage you to dive deeper into SVG and read up on additional tags such as `ellipse`, `line`, and `path`. Experiment with features like gradient fills and clipping masks.
+
+Once you're more comfortable with SVG, your mind will hopefully start bubbling with ideas about how the composability of React components can be leveraged to create composable graphics.
+
+Happy drawing!

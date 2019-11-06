@@ -1,0 +1,38 @@
+header {
+  display: grid;
+  grid-column: span 2;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  position: relative;
+  background-color: var(--offset-color);
+}
+
+header svg {
+  display: block;
+}
+
+header circle {
+  fill: var(--text-color);
+}
+
+header .logo {
+  padding: var(--base-height);
+  width: 72px;
+}
+
+header .controls {
+  position: absolute;
+  top: 0;
+  right: 1rem;
+}
+
+header .title {
+  display: grid;
+  align-content: center;
+  position: relative;
+}
+
+header .title h1 {
+  text-align: right;
+  margin-right: 1rem;
+}

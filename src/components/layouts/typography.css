@@ -1,0 +1,124 @@
+:root {
+  -webkit-text-size-adjust: 100%;
+  --base-size: 16px;
+  --base-height: 24px;
+  --grid-color: rgba(100, 100, 100, .1);
+  --offset-color: #F2EFED;
+  --pop-color: #D92B2B;
+  --highlight-color: #D9D6D4;
+  --accent-color: #abb3bc;
+  --text-color: #24282d;
+  --background-baseline: repeating-linear-gradient(
+    to bottom,
+    var(--grid-color),
+    var(--grid-color) 1px,
+    transparent 1px,
+    transparent var(--base-height)
+  );
+
+}
+
+html, .root {
+  font-size: var(--base-size);
+  line-height: var(--base-height);
+}
+
+body, p, h1, h2, h3, h4, h5 {
+  color: var(--text-color);
+}
+
+a {
+  color: var(--text-color);
+  text-decoration-color: var(--accent-color);
+  -webkit-tap-highlight-color: transparent;
+}
+
+a:focus {
+  outline: none;
+  background-color: var(--highlight-color);
+}
+
+.title h1 {
+  line-height: var(--line-height);
+}
+
+.title h1 a {
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+body {
+  position: relative;
+  margin: 0;
+}
+
+body, .article {
+  font-family: sans-serif;
+  font-size: 1rem;
+  line-height: var(--base-height);
+}
+
+blockquote {
+  display: relative;
+  margin-left: 0;
+  padding-left: 1rem;
+  border-left: 1.5rem double var(--offset-color);
+}
+
+h1, .h1 {
+  font-size: 2rem;
+  line-height: calc(2 * var(--base-height));
+  margin-top: var(--base-height);
+  margin-bottom: var(--base-height);
+}
+h2, .h2 {
+  font-size: 1.75rem;
+  line-height: calc(2 * var(--base-height));
+  margin-top: var(--base-height);
+  margin-bottom: var(--base-height);
+}
+h3, .h3 {
+  font-size: 1.5rem;
+  line-height: calc(1 * var(--base-height));
+  margin-top: calc(2 * var(--base-height));
+  margin-bottom: var(--base-height);
+}
+h4, .h4 {
+  font-size: 1.25rem;
+  line-height: var(--base-height);
+  margin-top: var(--base-height);
+  margin-bottom: var(--base-height);
+}
+h5, .h5 {
+  font-size: 1rem;
+  line-height: var(--base-height);
+  margin-top: var(--base-height);
+  margin-bottom: 0rem;
+}
+p, ul, ol, pre, table, blockquote {
+  margin-top: 0rem;
+  margin-bottom: var(--base-height);
+}
+ul ul, ol ol, ul ol, ol ul {
+  margin-top: 0rem;
+  margin-bottom: 0rem;
+}
+
+/* Let's make sure all's aligned */
+hr, .hr {
+  border: 1px solid;
+  margin: -1px 0;
+}
+a, b, i, strong, em, small, code {
+}
+sub, sup {
+  position: relative;
+  vertical-align: baseline;
+}
+sup {
+  top: -0.5rem;
+}
+sub {
+  bottom: -0.25rem;
+}
+
