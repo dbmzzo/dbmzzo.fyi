@@ -14,7 +14,7 @@ const Header = () => (
     </div>
     <div className="title">
       <h1>
-        <Link to="/dan">
+        <Link to="/me">
           Daniel Matarazzo
         </Link>
       </h1>
