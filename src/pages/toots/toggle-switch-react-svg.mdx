@@ -26,12 +26,13 @@ decided to start from scratch with SVG.
 
 I also wanted the switch to be accessible, responsive to keyboard navigation,
 and accurately reflect `focus`, `checked`, and `diabled` states. To that end, I
-started with a standard checkbox control and use CSS to hide it and bind the
+started with a standard checkbox control and used CSS to hide it and bind the
 control's states to the SVG. In addition to preserving accessibility, this
-approach means we don't need to keep track of any state within our component.
+approach meant that I didn't need to keep track of any state within my component.
 
-An example of the switch in use can be seen in the header of this site, and it
-toggles a vertical rhythm grid. I implement it like this:
+An example of the switch in use can be seen in the header of this site. It
+toggles a vertical rhythm grid, and its implemented like this (minus the label,
+which I don't use in this context):
 
 ```js
 <Toggle
@@ -48,8 +49,9 @@ toggles a vertical rhythm grid. I implement it like this:
 
 #### SVG? In a Form Control? 
 
-There are well-worn techniques for restyling inputs with CSS, so why introduce
-SVG into the mix?
+There are well-worn techniques for restyling inputs with CSS. So why introduce
+SVG into the mix, especially for a component that could be easily drawn
+with CSS?
 
 It's a personal preference. I've never loved using CSS for drawing because, as
 anyone who has ever tried to draw a triangle with CSS knows, it has its
@@ -64,7 +66,7 @@ I think it's more fun, too.
 #### What About Accessibility?
 
 This custom control preserves the keyboard navigation, focus, aria-label of of
-a standard checkbox because it's backed by and tightly coupled to a standard
+a standard checkbox because it's directly coupled with a standard
 checkbox control.
 
 ### Let's Build It!
@@ -98,21 +100,21 @@ export default Toggle;
 
 #### Add Properties
 
-There are a number of properties that we'll need our `<Toggle />` component to accept. Let's
+There are a number of properties we'll need our `<Toggle />` component to accept. Let's
 start with the most essential:
 
-- `checked` boolean for the toggle's default condition
+- `checked` boolean for the toggle's checked status
 - `disabled` boolean for the toggle's disabled condition
 - `label` string for text label
 - `ariaLabel` string for accessible screen reader description
 
-Let's destructure those properties at the top of the function...
+Let's destructure those properties at the top of the function:
 
 ```js
 const Toggle = ({ checked, label, disabled }) => {
 ```
 
-...and render them:
+and render them:
 
 ```js{3-6,9}
 <label className="toggle">
@@ -132,8 +134,8 @@ const Toggle = ({ checked, label, disabled }) => {
 > property. To learn more about why, read
 > [this article from the React team](https://reactjs.org/docs/uncontrolled-components.html)
 
-Now you should have a checkbox that behaves identically to a native checkbox,
-but with a built-in label that we can interact with. See, we're already making
+We now have a checkbox that behaves identically to a native checkbox,
+but with a built-in label that we can interact with. We're already making
 our lives easier:
 
 <Toggle standard label="Boring Checkbox"/>
@@ -202,7 +204,7 @@ return (
 Before hiding the input element, ensure that it gets toggled when you click or tap
 on your new SVG.
 
-Once you've done that, we can hide the `input` with the following style:
+We can then hide the `input` with the following style:
 
 ```css
 input[type="checkbox"] {
@@ -211,12 +213,13 @@ input[type="checkbox"] {
 }
 ```
 
-Note that we can't use `display: none` or `visibility: hidden` because doing so
-removes our ability to interact with the native input.
+> Note that we can't use `display: none` or `visibility: hidden` because doing so
+> removes our ability to interact with the native input.
 
 #### Style the SVG Shapes
 
-I use [custom CSS properties](https://developer.mozilla.org/en-US/docs/Web/CSS/--*) on my site, so my stylesheet looks something like this:
+I use [custom CSS properties](https://developer.mozilla.org/en-US/docs/Web/CSS/--*) on my site,
+so my stylesheet looks something like this:
 
 ```css
 :root {
@@ -238,7 +241,7 @@ I use [custom CSS properties](https://developer.mozilla.org/en-US/docs/Web/CSS/-
 
 #### Checked Styles
 
-We need a way to let the `checked` condition of our native input to control the
+We need a way for the `checked` condition of our native input to control the
 style of our knob element. Doing so is easy using [the general sibling combinator](https://developer.mozilla.org/en-US/docs/Web/CSS/General_sibling_combinator)
 in conjunction with the [checked pseudo-class selector](https://developer.mozilla.org/en-US/docs/Web/CSS/:checked):
 
@@ -272,14 +275,14 @@ We want these changes to be animated, so update the basic `.knob` rule like so:
 }
 ```
 
-> The `transform-box: fill box;` line may be unfamiliar. Sometimes [SVG
+> The `transform-box: fill box;` line may be unfamiliar to you. Sometimes [SVG
 > elements behave differently from standard HTML elements when applying
-> transforms](https://css-tricks.com/transforms-on-svg-elements/), and this
+> transformations](https://css-tricks.com/transforms-on-svg-elements/), and this
 > rule helps them act like their HTML counterparts.
 
 #### Disabled Styles
 
-We can use a similar technique for the disabled state, but targeting all
+We can use a similar technique for the disabled state, targeting all
 siblings (in this case our SVG and the label):
 
 ```css
@@ -291,7 +294,7 @@ siblings (in this case our SVG and the label):
 #### Focus Highlight
 
 There are a number of ways we could indicate when the toggle is the focused
-element.  I chose to add a third shape to my SVG, an inset highlight:
+element. I chose to add a third shape to my SVG, an inset highlight:
 
 ```js{10-17}
 <svg height="24px" viewBox="0,0 48,24">
@@ -329,7 +332,7 @@ Make the highlight invisible in its non-focused state:
   fill: none;
   stroke: none;
   stroke-width: 0;
-  tansition: stroke, stroke-width
+  tansition: stroke, stroke-width;
 }
 ```
 
@@ -342,7 +345,7 @@ And visible in its focused state:
 }
 ```
 
-#### Call a Function on Toggle
+#### Execute Callback on Toggle
 
 The point of this whole exercise is to toggle something, so let's add a function
 to our component properties:
@@ -370,16 +373,15 @@ And call that function when the input is toggled:
 
 #### Presto!
 
-There you have it -- a totally custom-designed, keyboard and screen-reader
-accessible, slide toggle backed by a native input.
+There you have it -- a totally custom, stateless, keyboard- and screen-reader
+accessible slide toggle backed by a native input.
 
 ### Next Steps
 
 There are still lots of things we can do to make our shiny new toggle even
-shinier.  Here are some ideas for improvements:
+shinier. Here are some ideas for improvements:
 
-- Incorporate the [indeterminate](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox)
-- state into the component.
+- Incorporate the [indeterminate](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox) state into the component.
 - Add size classes to make `small` and `large` versions of the toggle
 
 If you have any feedback or questions, don't hesitate to [contact me](/me).
