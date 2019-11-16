@@ -68,13 +68,13 @@ blockquote {
 h1, .h1 {
   font-size: 2rem;
   line-height: calc(2 * var(--base-height));
-  margin-top: var(--base-height);
+  margin-top: calc(var(--base-height) * 2);
   margin-bottom: var(--base-height);
 }
 h2, .h2 {
   font-size: 1.75rem;
   line-height: calc(2 * var(--base-height));
-  margin-top: var(--base-height);
+  margin-top: calc(var(--base-height) * 2);
   margin-bottom: var(--base-height);
 }
 h3, .h3 {
@@ -86,7 +86,7 @@ h3, .h3 {
 h4, .h4 {
   font-size: 1.25rem;
   line-height: var(--base-height);
-  margin-top: var(--base-height);
+  margin-top: calc(2 * var(--base-height));
   margin-bottom: var(--base-height);
 }
 h5, .h5 {
