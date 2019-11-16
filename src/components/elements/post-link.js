@@ -4,7 +4,6 @@ import './post-link.css';
 
 const PostLink = ({ post }) => (
   <div className="post-link">
-    <div className="post-figure" />
     <div className="post-date">
       <Link to={post.frontmatter.path}>
         {post.frontmatter.date}
