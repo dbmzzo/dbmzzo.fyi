@@ -59,6 +59,9 @@ module.exports = {
         },
         gatsbyRemarkPlugins: [
           {
+            resolve: `gatsby-remark-smartypants`,
+          },
+          {
             resolve: 'gatsby-remark-images',
             options: {
               maxWidth: 850,
