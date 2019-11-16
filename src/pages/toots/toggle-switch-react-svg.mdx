@@ -20,12 +20,13 @@ I wanted a toggle switch that would match this site's visual style and render
 consistently across browsers, and I wanted to reuse it easily in other parts of
 my site.
 
-Since most browsers use native OS inputs or draw their own custom controls, so
-I started from scratch with an SVG.
+Most browsers use native OS inputs or draw their own custom controls, and I've 
+never enjoyed the process of restyling form controls with CSS. That's why I
+decided to start from scratch with SVG.
 
 I also wanted the switch to be accessible, responsive to keyboard navigation,
 and accurately reflect `focus`, `checked`, and `diabled` states. To this end, I
-start with a hidden `<input type="checkbox" />` control and use CSS to bind the
+started with a standard checkbox control and use CSS to hide it and bind the
 control's states to the SVG. In addition to preserving accessibility, this
 approach means we don't need to keep track of any state within our component.
 
