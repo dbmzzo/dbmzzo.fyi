@@ -36,7 +36,6 @@ pre[class*="language-"] {
   hyphens: none;
 }
 
-
 /* Code blocks */
 pre[class*="language-"] {
   overflow: auto;
@@ -163,11 +162,11 @@ pre > code.highlight {
  * http://prismjs.com/plugins/line-highlight/
  */
 .gatsby-highlight-code-line {
-  border-left: .5rem solid #88bb88;
+  border-left: .25rem solid #88bb88;
   display: block;
   margin-left: -.5rem;
+  width: calc(100% + .75rem);
 }
-
 
 /**
  * Add back the container background-color, border-radius, padding, margin
@@ -177,7 +176,6 @@ pre > code.highlight {
   background-color: var(--offset-color);
   overflow: auto;
   padding: calc(var(--base-height) * .5) .5rem;
-  border-left: .5rem solid var(--highlight-color);
   margin-bottom: var(--base-height);
 }
 
