@@ -1,8 +1,4 @@
-```
-dmatarazzo@fastmail.com | dbmzzo.fyi | 347-439-5443
-```
-
-I'm Dan, a front-end developer with more than ten years of experience. I've built everything from vanilla HTML to interactive and visualizations. My focus lately has been on building React-based UI component libraries and composable charts, but I'm always excited by any opportunity to dive deep into new challenges and subject areas.
+I'm Dan, a front-end developer with more than ten years of experience. My focus lately has been on building React-based UI component libraries and composable charts, but I'm always excited by any opportunity to dive deep into new challenges and subject areas.
 
 ## Experience
 
@@ -10,8 +6,7 @@ I'm Dan, a front-end developer with more than ten years of experience. I've buil
 
 *Contractor, Philadelphia PA, 2017-2018*
 
-*Contributed to the development of Comcast's new React app for business network administration and monitoring.*
-
+* Contributed to the development of Comcast's new React app for business network administration and monitoring.
 * Built the app's flagship component, an interactive map for visualizing network health across large geographic areas.
 * Established the development process and principles for the app's dozens of charts and graphs.
 * Collaborated with engineers to design efficient APIs.
@@ -20,8 +15,7 @@ I'm Dan, a front-end developer with more than ten years of experience. I've buil
 
 *UI Developer, Conshohocken PA, 2015-2017*
 
-*Built React components ranging from basic UI building blocks to page layouts and complex data visualizations.*
-
+* Built React components ranging from basic UI building blocks to page layouts and complex data visualizations.
 * Produced an in-house library of React components for producing consistent, responsive charts and graphs.
 * Collaborated closely with UI and UX designers to ensure technical feasibility of proposed features and fidelity to visual designs.
 * Worked with engineers on designing API schemas for consumption by the front-end.
@@ -31,8 +25,7 @@ I'm Dan, a front-end developer with more than ten years of experience. I've buil
 
 *Front End Developer, West Chester PA, 2013—2015*
 
-*Built highly interactive websites that integrated seamlessly into the company’s native iPad app.*
-
+* Built highly interactive websites that integrated seamlessly into the company’s native iPad app.
 * Created tools, templates, and guidelines to promote consistent development practices.
 * Collaborated closely with designers, content providers, and merchandisers.
 * Built interactive prototypes to assist in the exploration and iteration of new features across all digital platforms.
@@ -50,22 +43,24 @@ I'm Dan, a front-end developer with more than ten years of experience. I've buil
 #### Front-End
 
 * Javascript/ES6
-* React/Redux
-* HTML
-* CSS and preprocessors
+* React, Redux, (Some Vue and Angular)
+* HTML5
+* CSS3 and preprocessors
 * Advanced SVG
 * D3, Highcharts, and other visualization libraries
 * Modern JS build stacks
+* Vim!
 
 #### Back-End
 
 * Node
+* SQL
 * Ruby (Some Rails)
 * PHP
 
-#### Also
+#### Odd-End
 
-* Fluency in Agile processes
+* Familiarity with Agile processes
 * Comfortable on the command line
 * Creative Suite, Sketch, InVision, and other graphic design and prototyping tools
 
