@@ -1,5 +1,3 @@
-I'm Dan, a front-end developer with more than ten years of experience. My focus lately has been on building React-based UI component libraries and composable charts, but I'm always excited by any opportunity to dive deep into new challenges and subject areas.
-
 ## Experience
 
 ### Think Company
@@ -25,7 +23,7 @@ I'm Dan, a front-end developer with more than ten years of experience. My focus 
 
 *Front End Developer, West Chester PA, 2013—2015*
 
-* Built highly interactive websites that integrated seamlessly into the company’s native iPad app.
+* Built highly interactive websites that integrated seamlessly into the company's native iPad app.
 * Created tools, templates, and guidelines to promote consistent development practices.
 * Collaborated closely with designers, content providers, and merchandisers.
 * Built interactive prototypes to assist in the exploration and iteration of new features across all digital platforms.
