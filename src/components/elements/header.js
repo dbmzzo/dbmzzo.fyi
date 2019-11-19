@@ -6,7 +6,7 @@ import './header.css';
 const Header = () => (
   <header>
     <div className="logo">
-      <Link to="/">
+      <Link aria-label="Link to Home" to="/">
         <svg width="72px" height="72px" viewBox="0,0 100,100">
           <circle cx="50" cy="50" r="50" />
         </svg>

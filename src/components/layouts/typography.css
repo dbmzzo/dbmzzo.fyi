@@ -28,9 +28,13 @@ body, p, h1, h2, h3, h4, h5 {
 }
 
 a {
+  text-decoration-color: hsl(0, 20%, 51%);
   color: var(--text-color);
-  text-decoration-color: var(--accent-color);
   -webkit-tap-highlight-color: transparent;
+}
+
+a:hover, a:active {
+  color: hsl(0, 20%, 51%);
 }
 
 a:focus {
