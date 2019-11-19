@@ -70,31 +70,31 @@ blockquote {
 }
 
 h1, .h1 {
-  font-size: 2rem;
+  font-size: 2.25rem;
   line-height: calc(2 * var(--base-height));
   margin-top: calc(var(--base-height) * 2);
   margin-bottom: var(--base-height);
 }
 h2, .h2 {
-  font-size: 1.75rem;
+  font-size: 2rem;
   line-height: calc(2 * var(--base-height));
   margin-top: calc(var(--base-height) * 2);
   margin-bottom: var(--base-height);
 }
 h3, .h3 {
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   line-height: calc(1 * var(--base-height));
   margin-top: calc(2 * var(--base-height));
   margin-bottom: var(--base-height);
 }
 h4, .h4 {
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   line-height: var(--base-height);
   margin-top: calc(2 * var(--base-height));
   margin-bottom: var(--base-height);
 }
 h5, .h5 {
-  font-size: 1rem;
+  font-size: 1.25rem;
   line-height: var(--base-height);
   margin-top: var(--base-height);
   margin-bottom: 0rem;
