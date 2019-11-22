@@ -1,27 +1,28 @@
-.eye, .eye * {
+.face, .face * {
   transform-origin: center center;
   transform-box: fill-box;
   backface-visibility: visible;
 }
 
-.eye .left {
+.eyes {
+  transform: translateY(-4px);
+}
+.eye.left {
   transform: translateX(-22px);
   fill: var(--highlight-color);
 }
 
-.eyes {
-  transform: translateY(-4px);
-}
-
-.eye .right {
+.eye.right {
   transform: translateX(22px);
   fill: var(--highlight-color);
 }
 
 .smile {
   stroke: var(--highlight-color);
-  stroke-width: 5px;
+  stroke-width: 3px;
   stroke-linecap: round;
   fill: none;
+  vector-effect: non-scaling-stroke;
   transform: translateY(16px);
+  transform-origin: center bottom;
 }
