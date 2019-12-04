@@ -162,7 +162,6 @@ pre > code.highlight {
 .gatsby-highlight-code-line {
   border-left: .5rem solid #bad8ba;
   border-right: .5rem solid #bad8ba;
-  background-color: #fbf9f9;
   display: block;
   margin-left: -.5rem;
   width: calc(100% - 0rem);

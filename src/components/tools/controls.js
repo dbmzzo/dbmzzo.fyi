@@ -5,7 +5,7 @@ import Toggle from '../elements/toggle';
 import './scope.css';
 
 const Controls = ({ gridActive, toggleGrid }) => (
-  <Toggle aria-label="Click here to toggle visibility of vertical rhythym grid" checked={gridActive} handleChange={toggleGrid} />
+  <Toggle label="grid" size="small" aria-label="Click here to toggle visibility of vertical rhythym grid" checked={gridActive} handleChange={toggleGrid} />
 );
 
 Controls.propTypes = {
