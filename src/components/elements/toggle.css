@@ -3,7 +3,19 @@
   vertical-align: middle;
   display: inline-flex;
   align-items: center;
-  line-height: 0;
+}
+
+.toggle .text-label {
+  order: 1;
+}
+
+.toggle svg {
+  order: 2;
+}
+
+.toggle.small .text-label {
+  font-variant: small-caps;
+  text-transform: lowercase;
 }
 
 .channel {
@@ -25,7 +37,8 @@
 }
 
 .text-label {
-  margin-left: .25rem;
+  margin: 0 .25rem;
+  font-weight: bold;
 }
 
 /* rules for checkbox state */

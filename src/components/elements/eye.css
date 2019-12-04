@@ -5,7 +5,6 @@
 }
 
 .eyes {
-  transform: translateY(-4px);
 }
 .eye.left {
   transform: translateX(-22px);
@@ -15,14 +14,4 @@
 .eye.right {
   transform: translateX(22px);
   fill: var(--highlight-color);
-}
-
-.smile {
-  stroke: var(--highlight-color);
-  stroke-width: 3px;
-  stroke-linecap: round;
-  fill: none;
-  vector-effect: non-scaling-stroke;
-  transform: translateY(16px);
-  transform-origin: center bottom;
 }

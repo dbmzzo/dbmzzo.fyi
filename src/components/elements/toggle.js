@@ -4,9 +4,15 @@ import PropTypes from 'prop-types';
 import './toggle.css';
 
 const Toggle = ({
-  checked, disabled, label, handleChange, ariaLabel, tabIndex, standard,
+  size, checked, disabled, label, handleChange, ariaLabel, tabIndex, standard,
 }) => {
-  const className = classNames('toggle', { standard });
+  const className = classNames('toggle', size, { standard });
+
+  const sizes = {
+    normal: '1em',
+    large: '2em',
+    small: '.9em',
+  };
 
   return (
     <label className={className}>
@@ -18,7 +24,7 @@ const Toggle = ({
         tabIndex={tabIndex}
         type="checkbox"
       />
-      <svg height="24px" width="48px" viewBox="0,0 48,24">
+      <svg height={sizes[size]} viewBox="0,0 48,24">
         <rect
           className="channel"
           x="0"
@@ -57,11 +63,13 @@ Toggle.defaultProps = {
   disabled: false,
   handleChange: null,
   standard: false,
+  size: 'normal',
   label: '',
   tabIndex: '0',
 };
 
 Toggle.propTypes = {
+  size: PropTypes.string,
   ariaLabel: PropTypes.string,
   checked: PropTypes.bool,
   disabled: PropTypes.bool,

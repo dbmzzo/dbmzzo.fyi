@@ -6,7 +6,6 @@
   --offset-color: #F2EFED;
   --pop-color: #D92B2B;
   --highlight-color: #D9D6D4;
-  --accent-color: #abb3bc;
   --text-color: #24282d;
   --background-baseline: repeating-linear-gradient(
     to bottom,
@@ -28,7 +27,6 @@ body, p, h1, h2, h3, h4, h5 {
 }
 
 a {
-  text-decoration-color: hsl(0, 20%, 51%);
   color: var(--text-color);
   -webkit-tap-highlight-color: transparent;
 }
