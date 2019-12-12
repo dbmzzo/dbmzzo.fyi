@@ -43,3 +43,19 @@ p.toot label {
   margin-right: 2rem;
 }
 
+.binding-example {
+  margin-bottom: var(--base-height);
+}
+
+.binding-example .label {
+  margin-left: .5rem;
+}
+
+.binding-example .checkbox:checked ~ .label:after {
+  margin-left: .5rem;
+  content: '🥔';
+}
+
+.binding-example .checkbox:checked ~ .label {
+  font-style: italic;
+}

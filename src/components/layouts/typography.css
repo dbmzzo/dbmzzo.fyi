@@ -32,7 +32,7 @@ a {
 }
 
 a:hover, a:active {
-  color: hsl(0, 20%, 51%);
+  color: var(--pop-color);
 }
 
 a:focus {
