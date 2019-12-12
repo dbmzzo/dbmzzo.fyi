@@ -1,0 +1,79 @@
+---
+title: Binding an Input's Pseudo-Class States to Sibling Elements with CSS
+path: /toots/binding-styles-to-input-focus
+date: 2019-12-12
+---
+
+## Binding an Input's Pseudo-Class States to Sibling Elements with CSS
+
+In the article [Build an Accessible Toggle Switch with React and
+SVG](/toots/toggle-switch-react-svg), I used a technique to bind the focus, checked, and disabled states of a hidden checkbox to adjacent html (or SVG)
+elements.
+
+This is accomplished using [the general sibling combinator](https://developer.mozilla.org/en-US/docs/Web/CSS/General_sibling_combinator) in conjunction with the `:checked`, `:disabled` and `:focus` pseudo-class selectors.
+
+There are other input and form-related pseudo-class selectors, all of which will work will work with this technique:
+
+[:checked](https://developer.mozilla.org/en-US/docs/Web/CSS/:checked), [:default](https://developer.mozilla.org/en-US/docs/Web/CSS/:default), [:disabled](https://developer.mozilla.org/en-US/docs/Web/CSS/:disabled), [:enabled](https://developer.mozilla.org/en-US/docs/Web/CSS/:enabled), [:focus](https://developer.mozilla.org/en-US/docs/Web/CSS/:focus), [:indeterminate](https://developer.mozilla.org/en-US/docs/Web/CSS/:indeterminate), [:in-range](https://developer.mozilla.org/en-US/docs/Web/CSS/:in-range), [:invalid](https://developer.mozilla.org/en-US/docs/Web/CSS/:invalid), [:optional](https://developer.mozilla.org/en-US/docs/Web/CSS/:optional), [:out-of-range](https://developer.mozilla.org/en-US/docs/Web/CSS/:out-of-range), [:placeholder-shown](https://developer.mozilla.org/en-US/docs/Web/CSS/:placeholder-shown), [:read-only](https://developer.mozilla.org/en-US/docs/Web/CSS/:read-only), [:read-write](https://developer.mozilla.org/en-US/docs/Web/CSS/:read-write), [:required](https://developer.mozilla.org/en-US/docs/Web/CSS/:required), [:valid](https://developer.mozilla.org/en-US/docs/Web/CSS/:valid)
+
+I thought it was worth saving an example of how to do this for quick future reference.
+
+For simplicity, this example simply affects the appearance of an adjacent
+`<span class="label">` element.
+
+> Note: Nesting the `input` inside the `label` element is a valid way of
+> associating the input's events (click, touch, etc.) to the label text (or
+> other elements) without needing unique `id` attributes for your inputs and
+> corresponding `for` attributes for your labels.
+
+### Example
+
+This silly example illustrates how the concept works. The checked state of the
+`input` controls the style of the sibling `span`, changing the font style and
+adding a potato emoji using the
+[:after](https://developer.mozilla.org/en-US/docs/Web/CSS/::after)
+pseudo-class: 
+
+<div class="binding-example">
+  <label>
+    <input
+      class="checkbox"
+      type="checkbox"
+      aria-label="check this box to receive a potato"
+    />
+    <span class="label">
+      Potato
+    </span>
+  </label>
+</div>
+
+Here's the code for making it work:
+
+**HTML:**
+
+```
+<label>
+  <input
+    class="checkbox"
+    type="checkbox"
+    disabled="true"
+    defaultChecked="false"
+    ariaLabel="check this box to receive a potato"
+  />
+  <span class="label">Potato</span>
+</label>
+```
+
+**CSS:**
+
+```
+.checkbox:checked ~ .label {
+  font-style: italic;
+}
+
+.checkbox:checked ~ .label:after {
+  content: '🥔';
+}
+```
+
+That's it! If you have any questions, [let me know](/me).
