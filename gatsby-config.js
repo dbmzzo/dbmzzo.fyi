@@ -8,6 +8,15 @@ module.exports = {
     'gatsby-plugin-react-helmet',
     'gatsby-transformer-sharp',
     {
+      resolve: 'gatsby-plugin-matomo',
+      options: {
+        siteId: '1',
+        matomoUrl: 'https://matomo.dzzo.fyi',
+        siteUrl: 'https://dzzo.fyi',
+        disableCookies: '1',
+      },
+    },
+    {
       resolve: 'gatsby-plugin-sharp',
       options: {
         stripMetadata: true,
@@ -59,7 +68,7 @@ module.exports = {
         },
         gatsbyRemarkPlugins: [
           {
-            resolve: `gatsby-remark-smartypants`,
+            resolve: 'gatsby-remark-smartypants',
           },
           {
             resolve: 'gatsby-remark-images',
