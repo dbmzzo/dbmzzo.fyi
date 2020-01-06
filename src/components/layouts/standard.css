@@ -59,3 +59,62 @@ p.toot label {
 .binding-example .checkbox:checked ~ .label {
   font-style: italic;
 }
+
+.path-explorer path {
+  stroke-width: 3;
+  vector-effect: non-scaling-stroke;
+  fill: none;
+  stroke: var(--pop-color);
+}
+
+.path-explorer {
+  display: flex;
+  flex-direction: row;
+}
+
+.path-explorer textarea {
+  box-sizing: border-box;
+  border: none;
+  border-top: 12px solid var(--highlight-color);
+  border-bottom: 12px solid var(--highlight-color);
+  font-size: 1.4rem;
+  line-height: var(--base-height);
+  background-color: var(--offset-color);
+  width: 100%;
+  height: 96px;
+  padding: 12px 0;
+  margin: 0;
+}
+
+
+.path-explorer path:nth-child(odd) {
+  stroke: var(--text-color);
+}
+
+.path-explorer .command-list {
+  flex: 1;
+  padding-right: 1rem;
+}
+
+.path-explorer .path-preview {
+  position: relative;
+  flex: auto;
+}
+
+.path-explorer .path-preview>div {
+  position: absolute;
+  width: 100%;
+}
+
+.path-explorer .path-preview .exploded {
+  opacity: 1;
+}
+
+.path-explorer .path-preview .exploded path:not(.active) {
+  opacity: 0;
+}
+
+.path-explorer .path-preview .original path {
+  stroke-width: 3;
+  stroke-dasharray: 3 5;
+}
