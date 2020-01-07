@@ -357,24 +357,6 @@ const getRawCommandStrings = (data) => {
   return matches.length ? matches.map((command) => command.trim()) : [];
 };
 
-const getCalculatedViewBox = ((commands) => commands.reduce((accumulator, command) => {
-  const { startEnd } = command;
-  return accumulator.map((current, index) => {
-    switch (index) {
-      case 0:
-        return Math.min(startEnd[0][0], current);
-      case 1:
-        return Math.min(startEnd[0][1], current);
-      case 2:
-        return Math.max(startEnd[1][0], current);
-      case 3:
-        return Math.max(startEnd[1][1], current);
-      default:
-        return 0;
-    }
-  });
-}, [0, 0, 0, 0]));
-
 const getParsedData = (commands) => commands.reduce((accumulator, command) => accumulator.concat(command.commandString), '');
 
 const parse = (data) => {
@@ -382,12 +364,10 @@ const parse = (data) => {
   const parsedCommands = getParsedCommands(rawCommandStrings);
   const commands = getExpandedCommands(parsedCommands);
   const parsedData = getParsedData(commands);
-  const viewBox = getCalculatedViewBox(commands);
   return ({
     data,
     parsedData,
     commands,
-    viewBox,
   });
 };
 

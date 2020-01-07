@@ -36,32 +36,74 @@ const PathExplorer = () => {
     return (<path key={index} d={command} className={className} fill="none" stroke="var(--pop-color)" />);
   });
 
-  const commandList = parsed.commands.map((command) => {
+  const controlUI = parsed.commands.flatMap((command, commandIndex) => {
+    const { startEnd, controlPoints } = command;
+    if (commandIndex === 0) return null;
+    const size = 5;
+    const startEndPointsUI = startEnd.map(([x, y], index) => {
+      const isActive = activeCommand === commandIndex;
+      const className = classNames('point', 'start-end', { active: isActive, start: index === 0, end: index === 1 });
+      const x1 = x - (size / 2);
+      const y1 = y - (size / 2);
+      return (
+        <rect
+          className={className}
+          x={x1}
+          y={y1}
+          width={size}
+          height={size}
+          key={shortId()}
+        />
+      );
+    });
+    const controlPointsUI = !controlPoints ? [] : controlPoints.map(([x, y]) => (<circle className="point control-point" cx={x} cy={y} r={size / 2} key={shortId()} />));
+    const controlLinesUI = !controlPoints ? [] : controlPoints.map(([x1, y1], controlIndex) => {
+      const [x2, y2] = startEnd[controlIndex];
+      return (<line className="control-line" x1={x1} y1={y1} x2={x2} y2={y2} key={shortId()} />);
+    });
+    const isActive = activeCommand === commandIndex;
+    const className = classNames('command-controls', { active: isActive });
+    return (
+      <g className={className} key={shortId()}>
+        <g className="control-lines">{controlLinesUI}</g>
+        <g className="start-end-points">{startEndPointsUI}</g>
+        <g className="control-points">{controlPointsUI}</g>
+      </g>
+    );
+  });
+
+  const commandList = parsed.commands.map((command, commandIndex) => {
     const genericCommand = commandCatalog[command.code];
     const parameterList = genericCommand.parameters.map((param, parameterIndex) => {
       const value = command.parameters[parameterIndex];
       const paramDescription = parameterCatalog[param];
       const isActive = activeCommand === parameterIndex;
-      const className = { active: isActive };
+      const className = classNames('parameter-list', { active: isActive });
       return (
-        <li key={shortId()} className={className}>
-          <div>
-            {param}
-            {value}
-          </div>
-          <div>
+        <li key={shortId()} onMouseEnter={() => setActiveCommand(commandIndex)} className={className}>
+          <span className="param-value">
+            <span className="param-name">
+              {param}
+            </span>
+            <span className="param-value">
+              {value}
+            </span>
+          </span>
+          <span className="param-description">
             {paramDescription}
-          </div>
+          </span>
         </li>
       );
     });
-    const sublist = <ul>{parameterList}</ul>;
+    const sublist = <ul className="parameter-list">{parameterList}</ul>;
+    const isActive = activeCommand === commandIndex;
+    const className = classNames('command', { active: isActive });
     return (
-      <li key={shortId()}>
-        <span>
+      <li className={className} key={shortId()}>
+        <span className="command-code">
           {command.code}
         </span>
-        <span>
+        <span className="command-description">
           {genericCommand.description}
         </span>
         {sublist}
@@ -76,8 +118,6 @@ const PathExplorer = () => {
         <div className="command-list">
           <label htmlFor="path-command">Path data:</label>
           <textarea id="path-command" defaultValue={pathData} ref={dataRef} onChange={updatePathData} />
-          <p>{pathData}</p>
-          <p>{parsed.viewBox.join(' ')}</p>
           <ul>
             {commandList}
           </ul>
@@ -90,7 +130,12 @@ const PathExplorer = () => {
           </div>
           <div className="exploded">
             <svg width="100%" viewBox={viewBox}>
-              {isolatedPaths}
+              <g ref={svgRef}>
+                {isolatedPaths}
+                <g className="control-ui">
+                  {controlUI}
+                </g>
+              </g>
             </svg>
           </div>
         </div>

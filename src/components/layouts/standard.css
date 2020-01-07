@@ -61,10 +61,14 @@ p.toot label {
 }
 
 .path-explorer path {
-  stroke-width: 3;
-  vector-effect: non-scaling-stroke;
+  stroke-width: 2.25;
   fill: none;
-  stroke: var(--pop-color);
+  stroke: var(--highlight-color);
+}
+
+.path-explorer .control-lines line {
+  stroke-width: 1;
+  stroke: var(--text-color);
 }
 
 .path-explorer {
@@ -87,10 +91,6 @@ p.toot label {
 }
 
 
-.path-explorer path:nth-child(odd) {
-  stroke: var(--text-color);
-}
-
 .path-explorer .command-list {
   flex: 1;
   padding-right: 1rem;
@@ -110,11 +110,46 @@ p.toot label {
   opacity: 1;
 }
 
+.path-explorer .path-preview .exploded path {
+  stroke: var(--pop-color);
+}
+
 .path-explorer .path-preview .exploded path:not(.active) {
   opacity: 0;
 }
 
+.path-explorer .path-preview .exploded .command-controls:not(.active) {
+  opacity: 0;
+}
+
 .path-explorer .path-preview .original path {
-  stroke-width: 3;
-  stroke-dasharray: 3 5;
+  stroke-width: 2.25;
+}
+
+.command-list li {
+  display: inline;
+}
+
+.command-list ul {
+  display: inline;
+  margin: 0;
+  padding: 0;
+}
+
+.path-explorer .param-name {
+  display: none;
+}
+
+.path-explorer .param-description {
+  display: none;
+}
+
+.path-explorer .command-description {
+  display: none;
+}
+
+.path-explorer .point {
+  fill: white;
+  stroke-width: 2.25;
+  stroke: var(--text-color);
 }
