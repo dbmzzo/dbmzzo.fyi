@@ -62,6 +62,8 @@ const getChunks = (array, size) => {
   return chunked;
 };
 
+const norm = (value, range) => (value - range[0]) / (range[1] - range[0]);
+
 // chunk parameters into individual groups
 const getExpandedParameters = (code, parameters) => {
   const genericCommand = commandCatalog[code];
@@ -269,17 +271,9 @@ const getControlPoints = (accumulator, command, index) => {
         : start;
       switch (isAbsolute) {
         case true: {
-          const second = [
-            parseFloat(parameters[0]),
-            parseFloat(parameters[1]),
-          ];
           return [first];
         }
         default: {
-          const second = [
-            parseFloat(parameters[0]) + start[0],
-            parseFloat(parameters[1]) + start[1],
-          ];
           return [first];
         }
       }
@@ -357,6 +351,40 @@ const getRawCommandStrings = (data) => {
   return matches.length ? matches.map((command) => command.trim()) : [];
 };
 
+const getMinMax = ((commands) => commands.reduce((accumulator, command) => {
+  const { startEnd } = command;
+  return accumulator.map((current, index) => {
+    switch (index) {
+      case 0:
+        return Math.min(startEnd[0][0], current);
+      case 1:
+        return Math.min(startEnd[0][1], current);
+      case 2:
+        return Math.max(startEnd[1][0], current);
+      case 3:
+        return Math.max(startEnd[1][1], current);
+      default:
+        return 0;
+    }
+  });
+}, [0, 0, 0, 0]));
+
+const getNormalized = (commands) => {
+  const minMax = getMinMax(commands);
+  const xRange = [minMax[0], minMax[2]];
+  const yRange = [minMax[1], minMax[3]];
+  const startEnd = commands.map(
+    (command) => command.startEnd.map(([x, y]) => [norm(x, xRange), norm(y, yRange)]),
+  );
+  // const controlPoints = commands.map(
+  //   (command) => command.controlPoints.map(([x, y]) => [norm(x, xRange), norm(y, yRange)]),
+  // );
+  return {
+    startEnd,
+    //    controlPoints,
+  };
+};
+
 const getParsedData = (commands) => commands.reduce((accumulator, command) => accumulator.concat(command.commandString), '');
 
 const parse = (data) => {
@@ -364,10 +392,12 @@ const parse = (data) => {
   const parsedCommands = getParsedCommands(rawCommandStrings);
   const commands = getExpandedCommands(parsedCommands);
   const parsedData = getParsedData(commands);
+  const normalized = getNormalized(commands);
   return ({
     data,
     parsedData,
     commands,
+    normalized,
   });
 };
 

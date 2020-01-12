@@ -14,8 +14,10 @@ const PathExplorer = () => {
 
   const updateBBox = () => {
     if (svgRef) {
-      const bb = svgRef.current.getBBox();
-      setViewBox(`${bb.x - 5} ${bb.y - 5} ${bb.width + 10} ${bb.height + 10}`);
+      const {
+        x, y, width, height,
+      } = svgRef.current.getBBox();
+      setViewBox(`${x - 5} ${y - 5} ${width + 10} ${height + 10}`);
     }
   };
 
@@ -26,48 +28,35 @@ const PathExplorer = () => {
 
   useEffect(() => {
     updateBBox();
-  });
+  }, [pathData]);
 
   const parsed = parse(pathData);
   const isolated = parsed.commands.map((command) => command.isolatedCommandString);
   const isolatedPaths = isolated.flatMap((command, index) => {
     const isActive = activeCommand === index;
     const className = classNames({ active: isActive });
-    return (<path key={index} d={command} className={className} fill="none" stroke="var(--pop-color)" />);
+    return (<path markerStart="url(#point-marker-start)" markerEnd="url(#point-marker-end)" key={index} d={command} className={className} fill="none" />);
   });
 
   const controlUI = parsed.commands.flatMap((command, commandIndex) => {
     const { startEnd, controlPoints } = command;
     if (commandIndex === 0) return null;
-    const size = 5;
-    const startEndPointsUI = startEnd.map(([x, y], index) => {
-      const isActive = activeCommand === commandIndex;
-      const className = classNames('point', 'start-end', { active: isActive, start: index === 0, end: index === 1 });
-      const x1 = x - (size / 2);
-      const y1 = y - (size / 2);
-      return (
-        <rect
-          className={className}
-          x={x1}
-          y={y1}
-          width={size}
-          height={size}
-          key={shortId()}
-        />
-      );
-    });
-    const controlPointsUI = !controlPoints ? [] : controlPoints.map(([x, y]) => (<circle className="point control-point" cx={x} cy={y} r={size / 2} key={shortId()} />));
     const controlLinesUI = !controlPoints ? [] : controlPoints.map(([x1, y1], controlIndex) => {
       const [x2, y2] = startEnd[controlIndex];
-      return (<line className="control-line" x1={x1} y1={y1} x2={x2} y2={y2} key={shortId()} />);
+      return (
+        <line
+          markerStart="url(#control-marker)"
+          markerEnd=""
+          className="control-line"
+          x1={x1} y1={y1} x2={x2} y2={y2} key={shortId()}
+        />
+    );
     });
     const isActive = activeCommand === commandIndex;
     const className = classNames('command-controls', { active: isActive });
     return (
       <g className={className} key={shortId()}>
         <g className="control-lines">{controlLinesUI}</g>
-        <g className="start-end-points">{startEndPointsUI}</g>
-        <g className="control-points">{controlPointsUI}</g>
       </g>
     );
   });
@@ -80,7 +69,11 @@ const PathExplorer = () => {
       const isActive = activeCommand === parameterIndex;
       const className = classNames('parameter-list', { active: isActive });
       return (
-        <li key={shortId()} onMouseEnter={() => setActiveCommand(commandIndex)} className={className}>
+        <li
+          key={shortId()}
+          onMouseEnter={() => setActiveCommand(commandIndex)}
+          className={className}
+        >
           <span className="param-value">
             <span className="param-name">
               {param}
@@ -130,11 +123,47 @@ const PathExplorer = () => {
           </div>
           <div className="exploded">
             <svg width="100%" viewBox={viewBox}>
+              <defs>
+                <marker
+                  id="point-marker-start"
+                  viewBox="0 0 10 10"
+                  refX="5"
+                  refY="5"
+                  markerWidth="1%"
+                  markerUnit="strokeWidth"
+                  orient="auto"
+                >
+                  <circle cx="5" cy="5" r="5" />
+                  <circle cx="5" cy="5" r="3" fill="white" />
+                </marker>
+                <marker
+                  id="point-marker-end"
+                  viewBox="0 0 10 10"
+                  refX="5"
+                  refY="5"
+                  markerWidth="1%"
+                  markerUnit="strokeWidth"
+                >
+                  <circle cx="5" cy="5" r="5" />
+                  <circle cx="5" cy="5" r="3" fill="white" />
+                  <circle cx="5" cy="5" r="1.5"  />
+                </marker>
+                <marker
+                  id="control-marker"
+                  viewBox="0 0 10 10"
+                  refX="5"
+                  refY="5"
+                  markerWidth="1%"
+                  markerUnit="strokeWidth"
+                  orient="auto"
+                >
+                  <rect x="0" y="0" width="10" height="10" />
+                  <rect x="2" y="2" width="6" height="6" fill="white" />
+                </marker>
+              </defs>
               <g ref={svgRef}>
+                {controlUI}
                 {isolatedPaths}
-                <g className="control-ui">
-                  {controlUI}
-                </g>
               </g>
             </svg>
           </div>
