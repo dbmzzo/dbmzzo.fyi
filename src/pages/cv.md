@@ -1,54 +1,43 @@
 # Daniel Matarazzo
 
-dmatarazzo@fastmail.com\
-347-439-5443\
-dzzo.fyi
+## PROFILE
+Experienced Front-End Developer with a 15-year background in JavaScript specializing in React-based applications and user interfaces. Design-oriented with a track record of converting designs into functional code. I excel in collaborating with teams to produce enterprise-level web applications.
 
-I'm a **Front-End Developer** with more than ten years of experience, focused lately on React-based charts and visualizations.
+## SKILLS
+- **Front-End:** JavaScript (ES6+), TypeScript, React, Redux, Angular, HTML, CSS, SVG, D3, Adobe Creative Suite
+- **Back-End:** AWS, Node.js, SQL, Ruby, PHP
+- **Tools & Methods:** Agile methodologies, CI/CD, unit testing, RESTful API design, version control (Git), responsive design
 
-## Skills
+## EXPERIENCE
+### Haivision Network Video Inc. 
+- **Position:** Front-End Developer
+- **Duration:** Feb 2020 – Jul 2023
+- **Responsibilities:**
+  - Spearheaded UI/UX development with React and TypeScript for complex network management systems.
+  - Enhanced UI framework, authored best practices, and facilitated the migration from legacy systems to React.
 
-### Front-End
-Javascript/ES6, modern Javascript build stacks, React, Redux, HTML5, CSS3 and preprocessors, CSS frameworks, SVG, D3, Gatsby, Wordpress
+### Think Company (Contractor) 
+- **Position:** Front-End Developer
+- **Duration:** Apr 2017 – Jan 2018
+- **Responsibilities:**
+  - Developed key components of Comcast’s React-based business network administration app for network status visualization.
 
-### Back-End, Etc.
-Node, SQL, Ruby, PHP, Travis (Wordpress plugins and customization), familiarity with Agile processes, comfortable on the command line
+### Monetate Inc. 
+- **Position:** UI Developer
+- **Duration:** Jan 2015 – Mar 2017
+- **Responsibilities:**
+  - Developed a library of reusable React components for responsive charts and graphs.
+  - Ensured design and technical fidelity of UI components collaborating closely with design teams.
 
-### Design
-Sketch, Photoshop and Illustrator, InVision, other design production and prototyping tools
-## Experience
+### QVC Inc. 
+- **Position:** Front-End Developer
+- **Duration:** Jul 2013 – Jan 2015
+- **Responsibilities:**
+  - Created SPA interfaces for the company’s native iPad app and established development best practices.
 
-### Think Company
-*Contractor, Philadelphia PA, 2017-2018*
+## EDUCATION
+### Pratt Institute, New York, NY
+- **Degree:** Master of Information and Library Science
 
-- Contributed to the development of Comcast's new React app for business network administration and monitoring
-- Built the app's flagship component, an interactive map for visualizing network health across large geographic areas
-- Established the development process and principles for the app's dozens of charts and graphs
-- Collaborated with back-end engineers to design APIs
-
-### Monetate Inc.
-*UI Developer, Conshohocken PA, 2015-2017*
-
-- Built React components ranging from basic UI building blocks to page layouts and complex data visualizations
-- Created a library of React components for producing fast-rendering, responsive charts and graphs
-- Collaborated closely with UI and UX designers to ensure technical feasibility of proposed features and fidelity to visual designs
-- Worked with engineers on designing API schemas for consumption by the front-end
-- Contributed to maintenance and expansion of company style guides, ensured adherence to standards through code 
-
-### QVC, Inc.
-*Front End Developer, West Chester PA, 2013—2015*
-
-- Built interactive single-page applications that integrated into the companys native iPad app
-- Created tools, templates, and guidelines to promote consistent development practices
-- Collaborated closely with designers, content providers, and merchandisers
-- Built interactive prototypes to assist in the exploration and iteration of new features across all digital platforms
-- Trained and worked in close collaboration with a junior developer
-
-### Freelance Web Developer
-*2007—2013 Brooklyn NY, Philadelphia PA*
-
-Completed dozens of small and large-scale web projects for a wide variety of clients, including single-page marketing sites, custom Wordpress templates and widgets, Facebook applications, and more
-
-## Education
-- Pratt Institute, New York NY Master of Information and Library Science, 2008
-- Champlain College, Burlington VT Bachelor of Science, Digital Graphic Design
+### Champlain College, Burlington, VT
+- **Degree:** Bachelor of Science in Media & Graphic Design

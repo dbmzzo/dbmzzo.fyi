@@ -20,7 +20,9 @@ export default IndexPage;
 
 export const pageQuery = graphql`
   query {
-    allMdx(sort: { order: DESC, fields: [frontmatter___date] }) {
+    allMdx(
+    filter: {fileAbsolutePath: {regex: "/toots/"}}
+    sort: { order: DESC, fields: [frontmatter___date] }) {
       edges {
         node {
           id
