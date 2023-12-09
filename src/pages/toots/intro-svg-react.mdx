@@ -3,6 +3,8 @@ title: Composing Graphics with React and SVG
 path: /toots/intro-svg-react
 date: 2019-10-24
 ---
+import Spinner from './components/spinner'
+
 ## Composing Graphics with React and SVG
 
 > This lesson assumes familiarity with HTML, CSS, and the basic principles of React but very little knowledge of SVG.
@@ -39,6 +41,10 @@ If you've ever opened an SVG file with a text editor, you'll know that it looks 
 </html>
 ```
 
+<svg viewBox="0 0 100 100" width="100">
+  <circle fill="lightblue" stroke="darkgray" cx="50" cy="50" r="45"/>
+</svg>
+
 This circle is a good starting place for our spinner.
 
 ### Create the spinner component
@@ -59,6 +65,10 @@ function Spinner() {
 export default Spinner;
 ```
 
+<svg viewBox="0 0 100 100" width="100">
+  <circle fill="lightblue" stroke="darkgray" strokeWidth="4" cx="50" cy="50" r="45"/>
+</svg>
+
 As you've probably inferred, the `circle` tag's attributes `cx` and `cy` are the coordinates of the circle's center, and `r` is the circle's radius.
 
 > What might not be as obvious is the `svg` element's `viewBox` attribute. You use `viewBox` to establish the coordinate space of the SVG. In this case, the top left corner is specified by the first two numbers, `0 0`, and the bottom right by the second two, `100 100`. This means the svg is 100 units wide and tall, and the center of the `svg` is at `50 50`. Try tweaking the `viewBox` values and see how the image changes.
@@ -73,6 +83,11 @@ Below the `<circle>` element, add a translucent white square. The attributes of 
 <rect x="25" y="25" width="50" height="50" stroke="darkgray" fill="white" fillOpacity=".5" strokeWidth="4"/>
 ```
 
+<svg viewBox="0 0 100 100" width="100">
+  <circle fill="lightblue" stroke="darkgray" strokeWidth="4" cx="50" cy="50" r="45"/>
+  <rect x="25" y="25" width="50" height="50" stroke="darkgray" fill="white" fillOpacity=".5" strokeWidth="4"/>
+</svg>
+
 Next, let's add a green hexagon. This is where the power of drawing with SVG starts to outshine what can be accomplished with pure HTML and CSS.
 
 The `points` attribute is simply a list of points that correspond to the corners of your polygon:
@@ -80,6 +95,12 @@ The `points` attribute is simply a list of points that correspond to the corners
 ```html
 <polygon points="63,57.5 50,65 37,57 37,42.5 50,35 63,42.5" fill="lightgreen" strokeWidth="4" stroke="darkgray" />
 ```
+
+<svg viewBox="0 0 100 100" width="100">
+  <circle fill="lightblue" stroke="darkgray" strokeWidth="4" cx="50" cy="50" r="45"/>
+  <rect x="25" y="25" width="50" height="50" stroke="darkgray" fill="white" fillOpacity=".5" strokeWidth="4"/>
+  <polygon points="63,57.5 50,65 37,57 37,42.5 50,35 63,42.5" fill="lightgreen" strokeWidth="4" stroke="darkgray" />
+</svg>
 
 Easy! Try changing, removing, or adding new numbers in the `points` attribute around to see what happens.
 
@@ -150,6 +171,7 @@ Apply the animation to the hexagon:
 .hex {
   fill: lightgreen;
   animation: rotation 2s infinite;
+  transform-origin: 50% 50%;
 }
 ```
 
@@ -160,14 +182,17 @@ To make things interesting, let's apply the same animation to the rectangle, but
   fill: white;
   fill-opacity: .5;
   animation: rotation 2s infinite alternate-reverse;
+  transform-origin: 50% 50%;
 }
 ```
+<Spinner animated={true} />
 
 Congratulations, you're now the owner an animated SVG component with two spinning shapes! Put it anywhere in your React app with the simple tag:
 
 ```jsx
 <Spinner />
 ```
+<eye />
 
 ### Challenges
 
