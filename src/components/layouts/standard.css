@@ -15,7 +15,6 @@ main {
   min-width: 0;
   flex: 1;
   width: 100vw;
-  background-color: white;
   padding: var(--base-height) 0;
 }
 

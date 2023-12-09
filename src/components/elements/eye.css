@@ -1,17 +1,20 @@
 .face, .face * {
   transform-origin: center center;
   transform-box: fill-box;
-  backface-visibility: visible;
 }
 
 .eyes {
 }
 .eye.left {
   transform: translateX(-22px);
-  fill: var(--highlight-color);
+  fill: var(--eye-color);
 }
 
 .eye.right {
   transform: translateX(22px);
-  fill: var(--highlight-color);
+  fill: var(--eye-color);
+}
+
+.pupil {
+  fill: var(--pupil-color);
 }

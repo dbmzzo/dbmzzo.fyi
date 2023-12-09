@@ -34,6 +34,9 @@ function SEO({
       htmlAttributes={{
         lang,
       }}
+      bodyAttributes={{
+        class: localStorage.getItem("dark") == "true" ? 'dark' : '' 
+      }}
       title={title}
       titleTemplate={`%s | ${site.siteMetadata.title}`}
       meta={[

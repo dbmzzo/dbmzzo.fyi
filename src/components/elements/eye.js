@@ -104,11 +104,11 @@ const Eye = () => {
       <g className="eyes">
         <g className="left eye">
           <animated.path style={eyeProps} d="M50,58 C55.5,58 60.5,55.5 65,50.5 C60.5,45.5 55.5,43 50,43 C44.5,43 39.5,45.5 35,50.5 C39.5,55.5 44.5,58 50,58 Z" />
-          <animated.circle style={pupilProps} cx="50" cy="50.5" r="6" />
+          <animated.circle className="pupil" style={pupilProps} cx="50" cy="50.5" r="6" />
         </g>
         <g className="right eye">
           <animated.path style={eyeProps} d="M50,58 C55.5,58 60.5,55.5 65,50.5 C60.5,45.5 55.5,43 50,43 C44.5,43 39.5,45.5 35,50.5 C39.5,55.5 44.5,58 50,58 Z" />
-          <animated.circle style={pupilProps} cx="50" cy="50.5" r="6" />
+          <animated.circle className="pupil" style={pupilProps} cx="50" cy="50.5" r="6" />
         </g>
       </g>
     </svg>

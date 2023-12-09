@@ -4,7 +4,6 @@ import "./footer.css"
 
 const Footer = () => (
     <footer>
-      © {new Date().getFullYear()} Daniel Bruno Matarazzo
     </footer>
 )
 

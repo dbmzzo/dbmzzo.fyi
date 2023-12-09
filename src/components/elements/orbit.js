@@ -19,7 +19,7 @@ class Orbit extends React.Component {
             <g transform="translate(-19.000000, -19.000000)">
               <g transform="translate(19.000000, 63.000000)" />
               <g transform="translate(63.000000, 63.000000) rotate(45.000000) translate(-63.000000, -63.000000) translate(19.000000, 19.000000)">
-                <circle fill="#24282D" cx="44" cy="44" r="44" />
+                <circle className="face" cx="44" cy="44" r="44" />
               </g>
             </g>
           </g>

@@ -4,17 +4,22 @@ import { connect } from 'react-redux';
 import Toggle from '../elements/toggle';
 import './scope.css';
 
-const Controls = ({ gridActive, toggleGrid }) => (
-  <Toggle label="grid" size="small" aria-label="Click here to toggle visibility of vertical rhythym grid" checked={gridActive} handleChange={toggleGrid} />
+const Controls = ({ gridActive, toggleGrid, darkActive, toggleDark }) => (
+  <>
+    <Toggle label="grid" size="small" aria-label="Click here to toggle visibility of vertical rhythym grid" checked={gridActive} handleChange={toggleGrid} />
+    <Toggle label="dark" size="small" aria-label="Click here to toggle dark mode" checked={darkActive} handleChange={toggleDark} />
+  </>
 );
 
 Controls.propTypes = {
   gridActive: PropTypes.bool.isRequired,
   toggleGrid: PropTypes.func.isRequired,
+  darkActive: PropTypes.bool.isRequired,
+  toggleDark: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = ({ gridActive }) => ({ gridActive });
-const mapDispatchToProps = (dispatch) => ({ toggleGrid: () => dispatch({ type: 'TOGGLE_GRID' }) });
+const mapStateToProps = ({ gridActive, darkActive }) => ({ gridActive, darkActive });
+const mapDispatchToProps = (dispatch) => ({ toggleGrid: () => dispatch({ type: 'TOGGLE_GRID' }), toggleDark: () => dispatch({type: 'TOGGLE_DARK'}) });
 
 const ConnectedControls = connect(
   mapStateToProps,
