@@ -35,7 +35,7 @@ function SEO({
         lang,
       }}
       bodyAttributes={{
-        class: localStorage.getItem("dark") == "true" ? 'dark' : '' 
+        class:   typeof window !== 'undefined' && localStorage.getItem("dark") == "true" ? 'dark' : '' 
       }}
       title={title}
       titleTemplate={`%s | ${site.siteMetadata.title}`}

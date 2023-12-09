@@ -7,14 +7,14 @@ const reducer = (state, action) => {
   }
   if (action.type === 'TOGGLE_DARK') {
     const isDark = document.body.className == "dark";
-    localStorage.setItem("dark", isDark ? "false" : "true");
+    typeof window !== 'undefined' && window.localStorage.setItem("dark", isDark ? "false" : "true");
     document.body.className = isDark ? '' : 'dark';
     return { ...state, darkActive: !state.darkActive };
   }
   return state;
 };
 
-const isDark = localStorage.getItem("dark") == "true";
+const isDark = typeof window !== 'undefined' && window.localStorage.getItem("dark") == "true";
 const initialState = { gridActive: false, darkActive: isDark };
 
 const createStore = () => reduxCreateStore(reducer, initialState);
