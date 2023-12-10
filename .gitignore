@@ -70,3 +70,5 @@ yarn-error.log
 
 scripts/gatsby-deploy
 tags
+tags.lock
+tags.temp

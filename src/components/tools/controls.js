@@ -7,7 +7,6 @@ import './scope.css';
 const Controls = ({ gridActive, toggleGrid, darkActive, toggleDark }) => (
   <>
     <Toggle label="grid" size="small" aria-label="Click here to toggle visibility of vertical rhythym grid" checked={gridActive} handleChange={toggleGrid} />
-    // <Toggle label="dark" size="small" aria-label="Click here to toggle dark mode" checked={darkActive} handleChange={toggleDark} />
   </>
 );
 
