@@ -19,7 +19,7 @@ body {
     transparent var(--base-height)
   );
   --eye-color: var(--highlight-color);
-  --pupil-color: black;
+  --pupil-color: var(--text-color);
 }
 
 body.dark {
