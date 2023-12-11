@@ -22,6 +22,9 @@ header .logo {
 
 header .controls {
   position: absolute;
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
   top: 0;
   right: 1rem;
 }

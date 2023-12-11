@@ -5,6 +5,7 @@ module.exports = {
     author: 'Daniel Matarazzo',
   },
   plugins: [
+    'gatsby-plugin-dark-mode',
     'gatsby-plugin-react-helmet',
     'gatsby-transformer-sharp',
     {

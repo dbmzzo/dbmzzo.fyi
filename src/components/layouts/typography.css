@@ -24,7 +24,7 @@ body {
 
 body.dark {
   --grid-color: rgba(100, 100, 100, .1);
-  --offset-color: #24282D;
+  --offset-color: #15191E;
   --pop-color: #D92B2B;
   --highlight-color: #D9D6D4;
   --text-color: white;
